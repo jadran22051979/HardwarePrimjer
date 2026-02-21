@@ -18,10 +18,10 @@ public class MockHardwareRepository implements HardwareRepository{
     static {
         hardwareList = new ArrayList<>();
 
-        Hardware firstHardware = new Hardware(1, "Tesla Model Y", "Electric car", new BigDecimal(50000),50, Category.CPU);
-        Hardware secondHardware = new Hardware(2, "Apartment on the main square", "Luxury apartment", new BigDecimal(500000),80, Category.GPU);
-        Hardware thirdHardware = new Hardware(3, "House on the beach", "Vacation house", new BigDecimal(5000000),90, Category.MBO);
-        Hardware fourthHardware = new Hardware(4, "Oldtimer Mercedes X 1800", "Vintage car", new BigDecimal(100000),120, Category.OTHER);
+        Hardware firstHardware = new Hardware(1, "Intel core i7", "CPU", new BigDecimal(50000),50, Category.CPU);
+        Hardware secondHardware = new Hardware(2, "GPU", "Luxury apartment", new BigDecimal(500000),80, Category.GPU);
+        Hardware thirdHardware = new Hardware(3, "MBO", "Vacation house", new BigDecimal(5000000),90, Category.MBO);
+        Hardware fourthHardware = new Hardware(4, "Mouse", "Mouse", new BigDecimal(100000),120, Category.OTHER);
 
         hardwareList.add(firstHardware);
         hardwareList.add(secondHardware);
