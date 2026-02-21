@@ -11,8 +11,8 @@ public enum Category {
     GPU(2, "GPU", "New and used"),
     MBO(3, "MBO", "New and used"),
     RAM(4, "RAM", "New and used"),
-    STORAGE(5, "Cars and motorcycles", "New and used"),
-    OTHER(6, "Cars and motorcycles", "New and used");
+    STORAGE(5, "Storage", "New and used"),
+    OTHER(6, "Other", "New and used");
 
     private final Integer id;
     private final String name;
