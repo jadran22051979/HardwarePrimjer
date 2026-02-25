@@ -10,10 +10,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
-public class HardwareServiceImpl  implements HardwareService {
+public class HardwareServiceImpl implements HardwareService {
     private HardwareRepository hardwareRepository;
+
     @Override
     public List<HardwareDTO> getAllHardware() {
         return hardwareRepository.getAllHardware().stream()
@@ -30,7 +33,7 @@ public class HardwareServiceImpl  implements HardwareService {
 
     @Override
     public void saveNewHardware(HardwareDTO hardware) {
-        hardwareRepository.saveNewHardware(convertArticleDtoToArticle(hardware));
+        hardwareRepository.saveNewHardware(convertHardwareDtoToHardware(hardware));
     }
 
     @Override
@@ -48,7 +51,7 @@ public class HardwareServiceImpl  implements HardwareService {
                 hardware.getCategory().getName());
     }
 
-    private Hardware convertArticleDtoToArticle(HardwareDTO hardwareDTO) {
+    private Hardware convertHardwareDtoToHardware(HardwareDTO hardwareDTO) {
         Integer latestId =
                 hardwareRepository.getAllHardware().stream()
                         .max((a1, a2) -> a1.getId().compareTo(a2.getId()))
@@ -67,5 +70,31 @@ public class HardwareServiceImpl  implements HardwareService {
                 searchHardwareDTO.getLowerPrice(),
                 searchHardwareDTO.getUpperPrice(),
                 Category.valueOf(searchHardwareDTO.getCategoryName()));
+    }
+
+    @Override
+    public Integer saveNewHardwarePost(HardwareDTO hardware) {
+        return hardwareRepository.saveNewHardwarePost(convertHardwareDtoToHardware(hardware));
+
+    }
+
+    @Override
+    public Optional<HardwareDTO> updateHardware(HardwareDTO hardwareDTO, Integer id) {
+        Optional<Hardware> updatedHardwareOptional =
+                hardwareRepository.updateHardware(convertHardwareDtoToHardware(hardwareDTO), id);
+        if (updatedHardwareOptional.isPresent()) {
+            return Optional.of(convertHardwareToHardwareDTO(updatedHardwareOptional.get()));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean hardwareByIdExists(Integer id) {
+        return hardwareRepository.hardwareByIdExists(id);
+    }
+
+    @Override
+    public boolean deleteHardwareById(Integer id) {
+        return hardwareRepository.deleteHardwareById(id);
     }
 }
